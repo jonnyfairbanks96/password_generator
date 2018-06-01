@@ -1,2 +1,11 @@
-# password_generator
-A CLI to generate secure passwords. 
+# Password Generator
+
+A CLI app to generate secure passwords.
+
+## Basic Setup
+To start creating secure passwords
+1. Clone this repo `git clone https://github.com/jonnyfairbanks96/password_generator.git`
+2. Go into the directory `cd password_generator`
+3. Change the permissions of the file by running `chmod +x ./generator.rb` so you can use `./generator.rb` to execute the app using `#!`
+4. You should now be able to run the app by typing `./generator.rb` in your terminal!`
+
