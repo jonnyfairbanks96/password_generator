@@ -33,7 +33,7 @@ def generate_password(size)
   ! @ # $ % ^ & * + ? , .
 }
 
-  new_password = (0...size).map{ charset.to_a[rand(charset.size)] }.join
+  new_password = (0...size).map { charset.to_a[rand(charset.size)] }.join
   new_password
 end
 
@@ -47,4 +47,18 @@ if options[:length] == nil
     options[:length] = gets.chomp
 end
 
-puts "\n\nPassword is #{generate_password((options[:length]).to_i)}\n\n"
+#Storing the option values
+password_length = (options.fetch(:length)).to_i
+password_count = (options.fetch(:count)).to_i
+
+output =  "\nNewly created password: #{generate_password(password_length)}\n\n"
+
+if password_count > 1
+  i = 0
+  until i >= password_count
+    puts "\nNewly created password: #{generate_password(password_length)}"
+    i+=1
+  end
+else
+  puts output
+end
