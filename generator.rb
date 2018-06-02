@@ -53,11 +53,10 @@ end
 password_length = (options.fetch(:length)).to_i
 password_count = (options.fetch(:count)).to_i
 
-output =  "\nNewly created password: #{generate_password(password_length)}\n\n"
 
 pastel = Pastel.new
-green  = pastel.on_blue(" ")
-red    = pastel.on_magenta(" ")
+green  = pastel.on_green(" ")
+red    = pastel.on_red(" ")
 
 bar = TTY::ProgressBar.new(
    "CREATING |:bar|",
@@ -65,9 +64,10 @@ bar = TTY::ProgressBar.new(
     incomplete: red,
     total: 30
 )
-30.times do
-  sleep(0.1)
-  bar.advance(1)
+
+6.times do
+  sleep(0.3)
+  bar.advance(5)
 end
 
 if password_count > 1
@@ -77,5 +77,5 @@ if password_count > 1
     i+=1
   end
 else
-  puts output
+  puts "\nNewly created password: #{generate_password(password_length)}\n\n"
 end
