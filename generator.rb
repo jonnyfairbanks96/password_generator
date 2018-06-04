@@ -5,6 +5,20 @@ require "optparse"
 require "tty-progressbar"
 require "pastel"
 
+
+# Progress Bar
+pastel = Pastel.new
+green  = pastel.on_green(" ")
+red    = pastel.on_red(" ")
+
+bar = TTY::ProgressBar.new(
+   "CREATING |:bar|",
+    complete: green,
+    incomplete: red,
+    total: 30
+)
+
+# Create the options to be nil unless specified in cli
 options = {
   count: nil,
   length: nil
@@ -27,18 +41,7 @@ OptionParser.new do |opts|
   end
 end.parse!
 
-def generate_password(size)
-  charset = %w{
-  1 2 3 4 5 6 7 8 9 0
-  a b c d e f g h i j k l m n o p q r s t u v w x y z
-  A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
-  ! @ # $ % ^ & * + ? , .
-}
-
-  new_password = (0...size).map { charset.to_a[rand(charset.size)] }.join
-  new_password
-end
-
+# Getting input from the user
 if options[:count] == nil
       print 'How many passwords do you need? '
     options[:count] = gets.chomp
@@ -53,21 +56,22 @@ end
 password_length = (options.fetch(:length)).to_i
 password_count = (options.fetch(:count)).to_i
 
-
-pastel = Pastel.new
-green  = pastel.on_green(" ")
-red    = pastel.on_red(" ")
-
-bar = TTY::ProgressBar.new(
-   "CREATING |:bar|",
-    complete: green,
-    incomplete: red,
-    total: 30
-)
-
+# Calling the progress bar
 6.times do
   sleep(0.3)
   bar.advance(5)
+end
+
+def generate_password(size)
+  charset = %w{
+  1 2 3 4 5 6 7 8 9 0
+  a b c d e f g h i j k l m n o p q r s t u v w x y z
+  A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+  ! @ # $ % ^ & * + ? , .
+}
+
+  new_password = (0...size).map { charset.to_a[rand(charset.size)] }.join
+  new_password
 end
 
 if password_count > 1
